@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { StatusNotaFiscal } from '../../util/models/status-nota-fiscal'
+import { StatusNotaFiscal } from '../../../shared/models/status-nota-fiscal'
 
 @Pipe({
   name: 'statusNotaFiscal'

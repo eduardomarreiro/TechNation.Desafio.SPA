@@ -16,22 +16,24 @@ import { ApiService } from '../../../core/service/api-service';
 export class DashboardNotasFiscaisComponent implements OnInit {
   @Output() settingsEvent = new EventEmitter<void>();
   filters: any;
-  // notasFiscais: { [key: string]: any } = {};
-  notasFiscais: any;
+  notasFiscais: { [key: string]: any } = {};
 
   constructor(private api: ApiService<any>) {}
 
   ngOnInit(): void {
+    debugger
     this.getNotasFiscais();
+    console.log("🚀 ~ DashboardNotasFiscaisComponent ~ ngOnInit ~ result:", this.notasFiscais)
   }
 
   getNotasFiscais() {
+    debugger
     const endpoints = [
-      { key: 'emitidas', endpoint: 'NotasFiscais' },
-      { key: 'emitidasSemCobranca', endpoint: 'NotasFiscais' },
-      { key: 'vencidas', endpoint: 'NotasFiscais' },
-      { key: 'aVencer', endpoint: 'NotasFiscais' },
-      { key: 'pagas', endpoint: 'NotasFiscais' }
+      { key: 'emitidas', endpoint: 'NotaFiscal' },
+      { key: 'emitidasSemCobranca', endpoint: 'NotaFiscal' },
+      { key: 'vencidas', endpoint: 'NotaFiscal' },
+      { key: 'aVencer', endpoint: 'NotaFiscal' },
+      { key: 'pagas', endpoint: 'NotaFiscal' }
     ];
 
     endpoints.forEach(({ key, endpoint }) => {
@@ -54,5 +56,4 @@ export class DashboardNotasFiscaisComponent implements OnInit {
     this.settingsEvent.emit();
   }
 
-  //metodo para cor dos cards
 }

@@ -1,10 +1,9 @@
-import { Component, ApplicationRef  } from '@angular/core';
+import { Component  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './util/components/navbar/navbar.component';
 import { SidebarComponent } from './util/components/sidebar/sidebar.component';
 import { DashboardNotasFiscaisComponent } from './pages/dashboard/dashboard-notas-fiscais/dashboard-notas-fiscais.component';
-// Ensure Bootstrap JS is properly imported
 declare var bootstrap: any;
 
 @Component({

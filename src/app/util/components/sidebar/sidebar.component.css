@@ -3,6 +3,8 @@
     transition: width 0.3s;
     width: 250px;
     overflow-x: hidden;
+    background-color: #ffffff;
+    border-right: 1px solid #dee2e6;
   }
   
   .sidebar.closed {
@@ -13,7 +15,13 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0.75rem 1rem;
+    /* padding: 0.75rem 1rem; */
+
+    color: #495057;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    transition: background-color 0.2s ease;
   }
   
   .sidebar.closed .nav-link {
@@ -33,4 +41,10 @@
   
   .sidebar.closed .bi {
     margin-right: 0;
+  }
+    
+  .sidebar .nav-link.active,
+  .sidebar .nav-link:hover {
+    background-color: #17a2b8;
+    color: #ffffff;
   }

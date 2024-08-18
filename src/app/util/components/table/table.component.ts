@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { NotaFiscal } from '../../models/nota-fiscal-model';
+import { NotaFiscal } from '../../../../shared/models/nota-fiscal-model';
 import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
-import { StatusNotaFiscal } from '../../models/status-nota-fiscal';
+import { StatusNotaFiscal } from '../../../../shared/models/status-nota-fiscal';
 
 @Component({
   selector: 'app-table',

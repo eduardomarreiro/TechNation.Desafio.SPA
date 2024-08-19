@@ -4,13 +4,21 @@ import { ProgressBarChartComponent } from "../../../util/components/chart/progre
 import { TableComponent } from "../../../util/components/table/table.component";
 import { BarChartComponent } from "../../../util/components/chart/bar-chart/bar-chart.component";
 import { ApiService } from '../../../core/service/api-service';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-dashboard-notas-fiscais',
   standalone: true,
-  imports: [LineChartComponent, ProgressBarChartComponent, TableComponent, BarChartComponent, FormsModule],
+  imports: [
+    LineChartComponent,
+    ProgressBarChartComponent,
+    TableComponent,
+    BarChartComponent,
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule],
   templateUrl: './dashboard-notas-fiscais.component.html',
   styleUrls: ['./dashboard-notas-fiscais.component.css']
 })
@@ -18,26 +26,92 @@ declare var bootstrap: any;
 export class DashboardNotasFiscaisComponent implements OnInit {
   @Output() settingsEvent = new EventEmitter<void>();
   @ViewChild('settingsModal', { static: false }) settingsModal!: ElementRef;
-  filters: any = {};
+  filtersForm: FormGroup;
+  filters: any;
+  statusNotaFiscal: any;
   cardNotasFiscais: any;
+  lineChart: any; 
+  barChart: any;
+  table: any;
 
-  constructor(private api: ApiService<any>) {}
 
-  ngOnInit(): void {  
-    this.getInfoCards()
+  constructor(private api: ApiService<any>, private fb: FormBuilder) {
+    this.filtersForm = this.fb.group({
+      DataEmissaoDe: [],
+      DataEmissaoAte: [''],
+      DataCobrancaDe: [''],
+      DataCobrancaAte: [''],
+      DataPagamentoDe: [''],
+      DataPagamentoAte: [''],
+      IdStatusNotaFiscal: ['']
+    });
   }
 
-  getInfoCards() {
-    this.api.get_route('NotaFiscal', 'GetQtdNotasPorCategoria', this.filters).subscribe({
-      next: (value) => {
+  ngOnInit(): void {
+    this.getStatusNotaFiscal();
+    this.getInfoLineChart(this.filters);
+    this.getInfoBarChart(this.filters);
+
+    this.filtersForm.valueChanges.subscribe(values => {
+      this.filters = {...values};      
+    });
+    this.getInfoCards(this.filters);
+  }
+
+  onFilter(filter: any) {    
+    this.getInfoCards(this.filtersForm.value);
+    this.getInfoLineChart(filter);
+    this.getInfoBarChart(filter);
+  }
+
+  getInfoCards(filters: any) {
+    this.closeSettingsModal()
+    this.api.get_route('NotaFiscal', 'GetQtdNotasPorCategoria', this.filtersForm.value).subscribe({
+      next: (value) => {        
         this.cardNotasFiscais = value;
       },
-      error: (err) => {
-        console.log("🚀 ~ DashboardNotasFiscaisComponent ~ error ~ err:", err);
+      error: (err) => {        
       },
     });
   }
+
+  getStatusNotaFiscal() {
+    this.api.get('StatusNotaFiscal').subscribe({
+      next: (value) => {
+        this.statusNotaFiscal = value;        
+      },
+      error(err) {        
+      },
+    })
+  }
+
+  getInfoLineChart(filters: any) {
+
+    this.api.get_route('NotaFiscal', 'GetInadimplenciaMensal', filters).subscribe({
+      next: (value) => {
+        this.lineChart = value;
+        console.log("🚀 ~ DashboardNotasFiscaisComponent ~ this.api.get_route ~ this.lineChart:", this.lineChart)
+                                
+      },
+      error: (err) => {        
+      },
+    });
+    
+  }
   
+  getInfoBarChart(filters: any) {
+    this.api.get_route('NotaFiscal', 'GetReceitaMensal', filters).subscribe({
+      next: (value) => {
+        this.barChart = value;        
+      },
+      error: (err) => {        
+      },
+    });
+  }
+
+  getInfoTable(filters: any) {
+    
+  }
 
   emitSettingsEvent() {
     this.openSettingsModal();
@@ -50,5 +124,8 @@ export class DashboardNotasFiscaisComponent implements OnInit {
     });
     settingsModal.show();
   }
-
+  closeSettingsModal() {
+    const modal = bootstrap.Modal.getInstance(this.settingsModal?.nativeElement);
+    modal?.hide();
+  }
 }

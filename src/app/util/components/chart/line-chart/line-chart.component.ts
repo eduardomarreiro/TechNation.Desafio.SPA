@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, input, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -8,30 +8,41 @@ import { Chart } from 'chart.js';
   templateUrl: './line-chart.component.html',
   styleUrl: './line-chart.component.css'
 })
-export class LineChartComponent implements AfterViewInit {
+export class LineChartComponent implements OnInit, AfterViewInit, OnChanges {
+  
   @Input() data!: any;
   @Input() title!: string;
   @Input() idChart!: string;
   @Output() settingsEvent = new EventEmitter<void>();
   
+  private chart: any;
+
+  ngOnInit(): void {}
+
   ngAfterViewInit(): void {
-    this.createChart();
+    this.initializeCharts();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data'] && !changes['data'].firstChange) {
+      this.updateChart();
+    }
   }
 
   initializeCharts() {
-
+    this.createChart();
   }
 
   createChart() {
     const ctx = (document.getElementById(this.idChart) as HTMLCanvasElement).getContext('2d');
     if (ctx) {
-      new Chart(ctx, {
+      this.chart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          labels: this.data.labels,
           datasets: [{
             label: 'Notas Fiscais',
-            data: [65, 59, 80, 81, 56, 55],
+            data: this.data.data,
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
             fill: false
@@ -57,6 +68,15 @@ export class LineChartComponent implements AfterViewInit {
       });
     }
   }
+
+  updateChart() {
+    if (this.chart) {
+      this.chart.data.labels = this.data.labels;
+      this.chart.data.datasets[0].data = this.data.data;
+      this.chart.update();
+    }
+  }
+
   emitSettingsEvent() {
     this.settingsEvent.emit();
   }

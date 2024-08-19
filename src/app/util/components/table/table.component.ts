@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { FormsModule } from '@angular/forms'; 
 
 @Component({
   selector: 'app-table',
@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnChanges {
   @Input() data: any[] = [];
   filterText: string = '';
   filteredNotasFiscais: any[] = [];
@@ -19,7 +19,18 @@ export class TableComponent implements OnInit {
   totalPages: number = 1;
 
   ngOnInit() {
+    this.applyFiltersAndPagination();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['data']) {
+      this.applyFiltersAndPagination();
+    }
+  }
+
+  applyFiltersAndPagination() {
     this.filteredNotasFiscais = this.data;
+    this.filterNotasFiscais();
     this.paginate();
   }
 
@@ -28,7 +39,6 @@ export class TableComponent implements OnInit {
       this.filteredNotasFiscais = this.data.filter(notaFiscal =>
         notaFiscal.nomePagador.toLowerCase().includes(this.filterText.toLowerCase()) ||
         notaFiscal.numeroIdentificacao.toLowerCase().includes(this.filterText.toLowerCase())
-        
       );
     } else {
       this.filteredNotasFiscais = this.data;

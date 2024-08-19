@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
 })
 export class SidebarComponent {
   @Output() toggle = new EventEmitter<boolean>();
-  isSidebarClosed = false;
+  isSidebarClosed = true;
 
   toggleSidebar() {
     this.isSidebarClosed = !this.isSidebarClosed;

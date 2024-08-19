@@ -30,7 +30,7 @@ export class DashboardNotasFiscaisComponent implements OnInit {
   filters: any;
   statusNotaFiscal: any;
   cardNotasFiscais: any;
-  lineChart: any; 
+  lineChart: any;
   barChart: any;
   table: any;
 
@@ -51,26 +51,28 @@ export class DashboardNotasFiscaisComponent implements OnInit {
     this.getStatusNotaFiscal();
     this.getInfoLineChart(this.filters);
     this.getInfoBarChart(this.filters);
+    this.getInfoTable(this.filters);
 
     this.filtersForm.valueChanges.subscribe(values => {
-      this.filters = {...values};      
+      this.filters = { ...values };
     });
     this.getInfoCards(this.filters);
   }
 
-  onFilter(filter: any) {    
+  onFilter(filter: any) {
     this.getInfoCards(this.filtersForm.value);
     this.getInfoLineChart(filter);
     this.getInfoBarChart(filter);
+    this.getInfoTable(filter);
   }
 
   getInfoCards(filters: any) {
     this.closeSettingsModal()
     this.api.get_route('NotaFiscal', 'GetQtdNotasPorCategoria', this.filtersForm.value).subscribe({
-      next: (value) => {        
+      next: (value) => {
         this.cardNotasFiscais = value;
       },
-      error: (err) => {        
+      error: (err) => {
       },
     });
   }
@@ -78,9 +80,9 @@ export class DashboardNotasFiscaisComponent implements OnInit {
   getStatusNotaFiscal() {
     this.api.get('StatusNotaFiscal').subscribe({
       next: (value) => {
-        this.statusNotaFiscal = value;        
+        this.statusNotaFiscal = value;
       },
-      error(err) {        
+      error(err) {
       },
     })
   }
@@ -90,27 +92,33 @@ export class DashboardNotasFiscaisComponent implements OnInit {
     this.api.get_route('NotaFiscal', 'GetInadimplenciaMensal', filters).subscribe({
       next: (value) => {
         this.lineChart = value;
-        console.log("🚀 ~ DashboardNotasFiscaisComponent ~ this.api.get_route ~ this.lineChart:", this.lineChart)
-                                
       },
-      error: (err) => {        
+      error: (err) => {
       },
     });
-    
+
   }
-  
+
   getInfoBarChart(filters: any) {
     this.api.get_route('NotaFiscal', 'GetReceitaMensal', filters).subscribe({
       next: (value) => {
-        this.barChart = value;        
+        this.barChart = value;
       },
-      error: (err) => {        
+      error: (err) => {
       },
     });
   }
 
   getInfoTable(filters: any) {
-    
+    this.api.get_route('NotaFiscal', 'GetInfoTableDashboard', filters).subscribe({
+      next: (value) => {
+        this.table = value;
+        console.log("🚀 ~ DashboardNotasFiscaisComponent ~ this.api.get_route ~ this.table:", this.table)
+        
+      },
+      error: (err) => {
+      },
+    });
   }
 
   emitSettingsEvent() {

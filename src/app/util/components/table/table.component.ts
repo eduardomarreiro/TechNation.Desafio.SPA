@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NotaFiscal } from '../../../../shared/models/nota-fiscal-model';
 import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
 import { StatusNotaFiscal } from '../../../../shared/models/status-nota-fiscal';
@@ -12,6 +12,7 @@ import { StatusNotaFiscal } from '../../../../shared/models/status-nota-fiscal';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent {
+  @Input() data: any;
   filterText: string = '';
   notasFiscais: NotaFiscal[] = [];
   filteredNotasFiscais: NotaFiscal[] = [];

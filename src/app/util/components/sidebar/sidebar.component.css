@@ -1,50 +1,52 @@
 .sidebar {
-    height: 100vh;
-    transition: width 0.3s;
-    width: 250px;
-    overflow-x: hidden;
-    background-color: #ffffff;
-    border-right: 1px solid #dee2e6;
-  }
-  
-  .sidebar.closed {
-    width: 80px;
-  }
-  
-  .sidebar .nav-link {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    /* padding: 0.75rem 1rem; */
+  position: fixed; /* Fixa a sidebar na tela */
+  top: 0; /* Alinha a sidebar no topo */
+  left: 0; /* Alinha a sidebar à esquerda */
+  height: 100%; /* Faz a sidebar ocupar toda a altura da tela */
+  transition: width 0.3s; /* Transição suave ao alterar a largura */
+  width: 250px; /* Largura padrão da sidebar */
+  overflow-x: hidden; /* Oculta o conteúdo que ultrapassa o limite da sidebar */
+  background-color: #ffffff;
+  border-right: 1px solid #dee2e6;
+  z-index: 1000; /* Garante que a sidebar esteja acima de outros elementos */
+}
 
-    color: #495057;
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    transition: background-color 0.2s ease;
-  }
-  
-  .sidebar.closed .nav-link {
-    text-align: center;
-  }
-  
-  .toggle-btn {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-  }
-  
-  .bi {
-    font-size: 1.25rem;
-    margin-right: 10px;
-  }
-  
-  .sidebar.closed .bi {
-    margin-right: 0;
-  }
-    
-  .sidebar .nav-link.active,
-  .sidebar .nav-link:hover {
-    background-color: #17a2b8;
-    color: #ffffff;
-  }
+.sidebar.closed {
+  width: 80px; /* Largura da sidebar quando fechada */
+}
+
+.sidebar .nav-link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #495057;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar.closed .nav-link {
+  text-align: center;
+}
+
+.toggle-btn {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.bi {
+  font-size: 1.25rem;
+  margin-right: 10px;
+}
+
+.sidebar.closed .bi {
+  margin-right: 0;
+}
+
+.sidebar .nav-link.active,
+.sidebar .nav-link:hover {
+  background-color: #17a2b8;
+  color: #ffffff;
+}

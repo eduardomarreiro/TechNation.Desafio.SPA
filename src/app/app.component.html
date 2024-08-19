@@ -6,7 +6,7 @@
       [class.sidebar-collapsed]="isSidebarClosed" 
       (toggle)="handleSidebarToggle($event)">
     </app-sidebar>
-    <div class="col" [class.main-expanded]="isSidebarClosed">
+    <div class="col ms-5" [class.main-expanded]="isSidebarClosed">
       <router-outlet></router-outlet>
     </div>
   </div>

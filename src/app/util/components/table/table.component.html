@@ -19,18 +19,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @for (notaFiscal of data; track notaFiscal)
+                    {
                     <tr>
-                        @for (notaFiscal of filteredNotasFiscais; track notaFiscal)
-                        {
                             <td>{{ notaFiscal.numeroIdentificacao }}</td>
                             <td>{{ notaFiscal.nomePagador }}</td>
                             <td>{{ notaFiscal.dataEmissao | date }}</td>
                             <td>{{ notaFiscal.dataCobranca | date }}</td>
                             <td>{{ notaFiscal.dataPagamento | date }}</td>
                             <td>{{ notaFiscal.valor | currency: 'BRL' }}</td>
-                            <td>{{ notaFiscal.statusNotaFiscal }}</td>
-                        }
-                    </tr>
+                            <td>{{ notaFiscal.statusNotaFiscal.nome }}</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

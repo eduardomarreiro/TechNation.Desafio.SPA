@@ -1,11 +1,29 @@
+:root {
+  --primary-custom-color: #92E3A9; /* Cor primária */
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #e9ecee;
     margin: 0;
     padding: 0;
     padding-top: 3.75rem;
   }
-      
+
+  .btn-custom {
+    background-color: #5549A6;
+    border-color: #5F50BF;
+    color: #ffffff;
+  }
+  
+  .btn-custom:hover,
+  .btn-custom:focus,
+  .btn-custom:active {
+    background-color: #5549A6;
+    border-color: #5F50BF;
+    color: #ffffff;
+  }
+  
   .card {
     border-radius: 0.75rem;
     margin-bottom: 1.5rem;
@@ -20,7 +38,7 @@ body {
   .card-title {
     font-size: 1.25rem;
     font-weight: bold;
-    color: #495057;
+    color: black;
   }
   
   .card-text.display-4 {
@@ -33,7 +51,7 @@ body {
   }
   
   .toggle-btn {
-    background-color: #17a2b8;
+    background-color: #5F50BF;
     color: #ffffff;
     border: none;
     width: 100%;
@@ -45,11 +63,11 @@ body {
   }
   
   .toggle-btn:hover {
-    background-color: #138496;
+    background-color: #5549A6;
   }
   
   .card-sales {
-    background-color: #17a2b8;
+    background-color: #5F50BF;
     color: #ffffff;
   }
   

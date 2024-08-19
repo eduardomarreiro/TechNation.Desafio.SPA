@@ -21,15 +21,15 @@
                 </thead>
                 <tbody>
                     @for (notaFiscal of paginatedNotasFiscais; track notaFiscal.id) {
-                    <tr>
-                        <td>{{ notaFiscal.numeroIdentificacao }}</td>
-                        <td>{{ notaFiscal.nomePagador }}</td>
-                        <td>{{ notaFiscal.dataEmissao | date:'dd/MM/yyyy' }}</td>
-                        <td>{{ notaFiscal.dataCobranca | date:'dd/MM/yyyy' }}</td>
-                        <td>{{ notaFiscal.dataPagamento | date:'dd/MM/yyyy' }}</td>
-                        <td>{{ notaFiscal.valor | currency: 'BRL' }}</td>
-                        <td>{{ notaFiscal.statusNotaFiscal.nome }}</td>
-                    </tr>
+                        <tr>
+                            <td>{{ notaFiscal.numeroIdentificacao }}</td>
+                            <td>{{ notaFiscal.nomePagador }}</td>
+                            <td>{{ notaFiscal.dataEmissao | date:'dd/MM/yyyy' }}</td>
+                            <td>{{ notaFiscal.dataCobranca | date:'dd/MM/yyyy' }}</td>
+                            <td>{{ notaFiscal.dataPagamento | date:'dd/MM/yyyy' }}</td>
+                            <td>{{ notaFiscal.valor | currency: 'BRL' }}</td>
+                            <td>{{ notaFiscal.statusNotaFiscal.nome }}</td>
+                        </tr>
                     }
                 </tbody>
             </table>

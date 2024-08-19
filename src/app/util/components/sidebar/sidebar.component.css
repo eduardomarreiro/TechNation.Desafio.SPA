@@ -1,25 +1,25 @@
 .sidebar {
-  position: fixed; /* Fixa a sidebar na tela */
-  top: 0; /* Alinha a sidebar no topo */
-  left: 0; /* Alinha a sidebar à esquerda */
-  height: 100%; /* Faz a sidebar ocupar toda a altura da tela */
-  transition: width 0.3s; /* Transição suave ao alterar a largura */
-  width: 250px; /* Largura padrão da sidebar */
-  overflow-x: hidden; /* Oculta o conteúdo que ultrapassa o limite da sidebar */
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transition: width 0.3s; 
+  width: 250px;
+  overflow-x: hidden; 
   background-color: #ffffff;
   border-right: 1px solid #dee2e6;
-  z-index: 1000; /* Garante que a sidebar esteja acima de outros elementos */
+  z-index: 1000;
 }
 
 .sidebar.closed {
-  width: 80px; /* Largura da sidebar quando fechada */
+  width: 80px;
 }
 
 .sidebar .nav-link {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #495057;
+  color: black;
   display: flex;
   align-items: center;
   padding: 10px 20px;
@@ -47,6 +47,6 @@
 
 .sidebar .nav-link.active,
 .sidebar .nav-link:hover {
-  background-color: #17a2b8;
+  background-color: #5F50BF;
   color: #ffffff;
 }

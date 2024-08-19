@@ -42,9 +42,8 @@ export class LineChartComponent implements OnInit, AfterViewInit, OnChanges {
           labels: this.data.labels,
           datasets: [{
             label: 'Notas Fiscais',
-            data: this.data.data,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
+            data: this.data.data,            
+            borderColor: '#5549A6',
             fill: false
           }]
         },

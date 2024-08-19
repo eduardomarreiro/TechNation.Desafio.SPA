@@ -1,8 +1,51 @@
 .table thead th {
-    background-color: #343a40;
-    color: white;
+    background-color: #9BAEBF;
+    color: black;
   }
   
   .table-striped tbody tr:nth-of-type(odd) {
     background-color: rgba(0,0,0,.05);
   }
+
+  /* Estilo da paginação */
+.pagination {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.page-item {
+  margin: .0825rem;
+}
+
+.page-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  color: #5F50BF;
+  background-color: white;
+  border: 1px solid #5F50BF;
+  border-radius: 0.25rem;
+  text-decoration: none;
+}
+
+.page-link:hover {
+  background-color: #5F50BF;
+  color: white;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  background-color: white;
+  border-color: #dee2e6;
+}
+
+.page-item.active .page-link {
+  color: white;
+  background-color: #5F50BF;
+  border-color: #5F50BF;
+}

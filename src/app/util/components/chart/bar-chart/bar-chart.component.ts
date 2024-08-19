@@ -39,8 +39,8 @@ export class BarChartComponent implements AfterViewInit, OnChanges {
           datasets: [{
             label: 'Notas Fiscais',
             data: this.data.data,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: '#5F50BF',
+            borderColor: '#5549A6',
             borderWidth: 1
           }]
         },

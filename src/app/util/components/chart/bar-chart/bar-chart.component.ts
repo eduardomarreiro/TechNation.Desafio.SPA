@@ -44,17 +44,26 @@ export class BarChartComponent implements AfterViewInit, OnChanges {
             borderWidth: 1
           }]
         },
-        options: {          
+        options: {
           responsive: true,
           scales: {
             y: {
-              beginAtZero: true
+              beginAtZero: true,
+              ticks: {
+                callback: function (value: string | number) {
+                  if (typeof value === 'number') {
+                    return `R$ ${value.toLocaleString()}`;
+                  }
+                  return value;
+                }
+              }
             }
           }
-        },        
+        },
       });
     }
   }
+
 
   updateChart() {
     if (this.chart) {
@@ -63,7 +72,7 @@ export class BarChartComponent implements AfterViewInit, OnChanges {
       this.chart.update();
     }
   }
-  
+
   emitSettingsEvent() {
     this.settingsEvent.emit();
   }

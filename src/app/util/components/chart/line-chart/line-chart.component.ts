@@ -9,15 +9,15 @@ import { Chart } from 'chart.js';
   styleUrl: './line-chart.component.css'
 })
 export class LineChartComponent implements OnInit, AfterViewInit, OnChanges {
-  
+
   @Input() data!: any;
   @Input() title!: string;
   @Input() idChart!: string;
   @Output() settingsEvent = new EventEmitter<void>();
-  
+
   private chart: any;
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     this.initializeCharts();
@@ -42,7 +42,7 @@ export class LineChartComponent implements OnInit, AfterViewInit, OnChanges {
           labels: this.data.labels,
           datasets: [{
             label: 'Notas Fiscais',
-            data: this.data.data,            
+            data: this.data.data,
             borderColor: '#5549A6',
             fill: false
           }]
@@ -60,13 +60,22 @@ export class LineChartComponent implements OnInit, AfterViewInit, OnChanges {
           responsive: true,
           scales: {
             y: {
-              beginAtZero: true
+              beginAtZero: true,
+              ticks: {
+                callback: function (value: string | number) {
+                  if (typeof value === 'number') {
+                    return `R$ ${value.toLocaleString()}`;
+                  }
+                  return value;
+                }
+              }
             }
           }
         }
       });
     }
   }
+
 
   updateChart() {
     if (this.chart) {

@@ -2,7 +2,8 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-8 mb-3">
-                <input type="text" [(ngModel)]="filterText" placeholder="Buscar..." class="form-control w-50 mb-2">
+                <input type="text" [(ngModel)]="filterText" placeholder="Buscar..." class="form-control w-50 mb-2"
+                    (ngModelChange)="filterNotasFiscais()">
             </div>
         </div>
         <div class="table-responsive">
@@ -19,20 +20,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (notaFiscal of data; track notaFiscal)
-                    {
+                    @for (notaFiscal of paginatedNotasFiscais; track notaFiscal.id) {
                     <tr>
-                            <td>{{ notaFiscal.numeroIdentificacao }}</td>
-                            <td>{{ notaFiscal.nomePagador }}</td>
-                            <td>{{ notaFiscal.dataEmissao | date }}</td>
-                            <td>{{ notaFiscal.dataCobranca | date }}</td>
-                            <td>{{ notaFiscal.dataPagamento | date }}</td>
-                            <td>{{ notaFiscal.valor | currency: 'BRL' }}</td>
-                            <td>{{ notaFiscal.statusNotaFiscal.nome }}</td>
-                        </tr>
+                        <td>{{ notaFiscal.numeroIdentificacao }}</td>
+                        <td>{{ notaFiscal.nomePagador }}</td>
+                        <td>{{ notaFiscal.dataEmissao | date:'dd/MM/yyyy' }}</td>
+                        <td>{{ notaFiscal.dataCobranca | date:'dd/MM/yyyy' }}</td>
+                        <td>{{ notaFiscal.dataPagamento | date:'dd/MM/yyyy' }}</td>
+                        <td>{{ notaFiscal.valor | currency: 'BRL' }}</td>
+                        <td>{{ notaFiscal.statusNotaFiscal.nome }}</td>
+                    </tr>
                     }
                 </tbody>
             </table>
         </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="previousPage()">Previous</a>
+                </li>
+                <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+                    <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                    <a class="page-link" (click)="nextPage()">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>

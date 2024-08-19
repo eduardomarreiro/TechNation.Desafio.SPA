@@ -11,9 +11,12 @@ export class ApiService<T> {
 
   constructor(private http: HttpClient) { }
 
-  get(endpoint: string, model: any): Observable<any> {
-    const params = new HttpParams({ fromObject: model });  
-    return this.http.get<any>(`${this.apiUrl}/${endpoint}`, { params });
+  get(endpoint: string): Observable<any> {    
+    return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
+  }
+
+  get_route(endpoint: string, route: string, model: any): Observable<any> {    
+    return this.http.get<any>(`${this.apiUrl}/${endpoint}/${route}`, model);
   }
 
   getById(endpoint: string, id: string): Observable<any> {
@@ -24,8 +27,8 @@ export class ApiService<T> {
     return this.http.post(`${this.apiUrl}/${endpoint}`, model);
   }
 
-  post_route(endpoint: string, model: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${endpoint}`, model);
+  post_route(endpoint: string, route: string ,model: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${endpoint}/${route}`, model);
   }
 
   put(endpoint: string, model: any): Observable<any> {

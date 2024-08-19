@@ -20,11 +20,4 @@ export class AppComponent {
   handleSidebarToggle(isClosed: boolean) {
     this.isSidebarClosed = isClosed;
   }
-
-  openSettingsModal() {
-    const settingsModal = new bootstrap.Modal(document.getElementById('settingsModal'), {
-      keyboard: false
-    });
-    settingsModal.show();
-  }
 }

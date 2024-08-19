@@ -7,50 +7,21 @@
 
 <!-- aqui vai ser ngfor -->
 <div class="row mb-4 d-flex justify-content-between">
-  <div class="col-md-2">
-    <div class="card shadow-sm text-center card-sales">
-      <div class="card-body">
-        <h5 class="card-title">Notas Emitidas</h5>
-        <p class="card-text display-4">R$12.345,23</p>
+  @for (card of cardNotasFiscais; track card) {
+    <div class="col-md-2">
+      <div class="card shadow-sm text-center card-sales">
+        <div class="card-body">
+          <h5 class="card-title">{{card.categoria}}</h5>
+          <p class="card-text display-4">{{card.quantidade}}</p>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-2">
-    <div class="card shadow-sm text-center card-sales">
-      <div class="card-body">
-        <h5 class="card-title">Notas Sem Cobrança</h5>
-        <p class="card-text display-4">$12,345</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <div class="card shadow-sm text-center card-orders">
-      <div class="card-body">
-        <h5 class="card-title">Notas Vencidas</h5>
-        <p class="card-text display-4">123</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <div class="card shadow-sm text-center card-customers">
-      <div class="card-body">
-        <h5 class="card-title">Notas A Vencer</h5>
-        <p class="card-text display-4">456</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <div class="card shadow-sm text-center card-requests">
-      <div class="card-body">
-        <h5 class="card-title">Notas Pagas</h5>
-        <p class="card-text display-4">10</p>
-      </div>
-    </div>
-  </div>
+  }
 </div>
 
 <div class="row mb-4">
-  <app-line-chart class="col-md-6" [idChart]="'salesChart'" [title]="'Evolução da Inadimplência Mensal'"></app-line-chart>
+  <app-line-chart class="col-md-6" [idChart]="'salesChart'"
+    [title]="'Evolução da Inadimplência Mensal'"></app-line-chart>
   <div class="col-md-6">
     <app-bar-chart class="col-md-6" [idChart]="'salesCharttt'" [title]="'Receita Recebida: Evolução Mensal'" [data]="{
       labels: ['January', 'February', 'March', 'April', 'May', 'June'],
@@ -73,7 +44,8 @@
   </div>
 </div>
 
-<!-- <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+<!--Modal de fitlros-->
+<div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -82,18 +54,48 @@
       </div>
       <div class="modal-body">
         <form>
-          <div class="mb-3">
-            <label for="setting1" class="form-label">Filtro 1</label>
-            <input type="text" class="form-control" id="setting1">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="DataEmissaoDe" class="form-label">Data Emissão de</label>
+              <input type="date" id="DataEmissaoDe" name="dataInicio" [(ngModel)]="filters.DataEmissaoDe" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="DataEmissaoAte" class="form-label">Data Emissão Até</label>
+              <input type="date" id="DataEmissaoAte" name="DataEmissaoAte" [(ngModel)]="filters.DataEmissaoAte" class="form-control" required>
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="setting2" class="form-label">Filtro 2</label>
-            <input type="text" class="form-control" id="setting2">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="DataCobrancaDe" class="form-label">Data Cobrança De</label>
+              <input type="date" id="DataCobrancaDe" name="DataCobrancaDe" [(ngModel)]="filters.DataCobrancaDe" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="DataCobrancaAte" class="form-label">Data Cobrança Até</label>
+              <input type="date" id="DataCobrancaAte" name="DataCobrancaAte" [(ngModel)]="filters.DataCobrancaAte" class="form-control" required>
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="setting3" class="form-label">Filtro 3</label>
-            <input type="text" class="form-control" id="setting3">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="DataPagamentoDe" class="form-label">Data Pagamento De</label>
+              <input type="date" id="DataPagamentoDe" name="DataPagamentoDe" [(ngModel)]="filters.DataPagamentoDe" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="DataPagamentoAte" class="form-label">Data Pagamento Até</label>
+              <input type="date" id="DataPagamentoAte" name="DataPagamentoAte" [(ngModel)]="filters.DataPagamentoAte" class="form-control" required>
+            </div>
           </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="DataPagamentoDe" class="form-label">Select</label>
+              <input type="date" id="DataPagamentoDe" name="DataPagamentoDe" [(ngModel)]="filters.DataPagamentoDe" class="form-control" required>
+            </div>
+          </div>
+          <!-- <div class="mb-3">
+            <label for="areaId" class="form-label">Área</label>
+            <select id="areaId" name="areaId" class="form-select" required>
+              <option *ngFor="let area of areas" [value]="area.id">{{ area.nome }}</option>
+            </select>
+          </div> -->
         </form>
       </div>
       <div class="modal-footer">
@@ -102,4 +104,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>

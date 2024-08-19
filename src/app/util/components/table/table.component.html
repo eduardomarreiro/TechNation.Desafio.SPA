@@ -1,8 +1,8 @@
 <div class="card shadow-sm">
     <div class="card-body">
-        <div class="row">    
-            <div class="col-md-8 mb-3">            
-              <input type="text" [(ngModel)]="filterText" placeholder="Buscar..." class="form-control w-50 mb-2">      
+        <div class="row">
+            <div class="col-md-8 mb-3">
+                <input type="text" [(ngModel)]="filterText" placeholder="Buscar..." class="form-control w-50 mb-2">
             </div>
         </div>
         <div class="table-responsive">
@@ -19,14 +19,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let notaFiscal of filteredNotasFiscais; let i = index">
-                        <td>{{ notaFiscal.numeroIdentificacao }}</td>
-                        <td>{{ notaFiscal.nomePagador }}</td>
-                        <td>{{ notaFiscal.dataEmissao | date }}</td>
-                        <td>{{ notaFiscal.dataCobranca | date }}</td>
-                        <td>{{ notaFiscal.dataPagamento | date }}</td>
-                        <td>{{ notaFiscal.valor | currency: 'BRL' }}</td>
-                        <td>{{ notaFiscal.statusNotaFiscal }}</td>
+                    <tr>
+                        @for (notaFiscal of filteredNotasFiscais; track notaFiscal)
+                        {
+                            <td>{{ notaFiscal.numeroIdentificacao }}</td>
+                            <td>{{ notaFiscal.nomePagador }}</td>
+                            <td>{{ notaFiscal.dataEmissao | date }}</td>
+                            <td>{{ notaFiscal.dataCobranca | date }}</td>
+                            <td>{{ notaFiscal.dataPagamento | date }}</td>
+                            <td>{{ notaFiscal.valor | currency: 'BRL' }}</td>
+                            <td>{{ notaFiscal.statusNotaFiscal }}</td>
+                        }
                     </tr>
                 </tbody>
             </table>

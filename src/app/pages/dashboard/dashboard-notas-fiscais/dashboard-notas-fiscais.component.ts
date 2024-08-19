@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { LineChartComponent } from "../../../util/components/chart/line-chart/line-chart.component";
-import { ProgressBarChartComponent } from "../../../util/components/chart/progress-bar-chart/progress-bar-chart.component";
 import { TableComponent } from "../../../util/components/table/table.component";
 import { BarChartComponent } from "../../../util/components/chart/bar-chart/bar-chart.component";
 import { ApiService } from '../../../core/service/api-service';
@@ -13,7 +12,6 @@ declare var bootstrap: any;
   standalone: true,
   imports: [
     LineChartComponent,
-    ProgressBarChartComponent,
     TableComponent,
     BarChartComponent,
     FormsModule,

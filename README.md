@@ -1,27 +1,33 @@
 # TechNationDesafioSPA
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+Este projeto foi desenvolvido com Angular 18.2.0.
 
-## Development server
+## Pré-requisitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Certifique-se de que a API está em execução antes de executar este projeto. Siga o passo a passo descrito no README da API para configurá-la corretamente.
 
-## Code scaffolding
+## Executando o Projeto
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Para executar o projeto, siga os passos abaixo:
 
-## Build
+1. **Construa a Imagem Docker**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+   Navegue até a pasta raiz onde está localizado o `Dockerfile` e execute o comando abaixo para construir a imagem Docker:
 
-## Running unit tests
+   ```bash
+   docker build -t technation-spa .
+   ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. **Execute o Container**
 
-## Running end-to-end tests
+    Após construir a imagem, execute o container e faça o mapeamento da porta 4200 com o comando:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    ```    
+    docker run -p 4200:4200 technation-spa    
+    ```
+Isso fará com que o aplicativo esteja disponível na URL http://localhost:4200.
 
-## Further help
+3. **Observações:**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Certifique-se de que a porta 4200 não está sendo usada por outro processo em sua máquina.
+Caso precise de mais informações ou ajuda, consulte o README da API para obter orientações adicionais.
